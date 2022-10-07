@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #3a444e;
+    color: #fff;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    padding: 20px 20px;
+    height: 450px;
+    width: 450px;
+}
+
+
+.graphic {
+    fill: transparent;
+    stroke: #fff;
+
+}
+
+.item {
+    /* display: none; */
+}
