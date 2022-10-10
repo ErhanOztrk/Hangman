@@ -1,6 +1,6 @@
 const word_el = document.getElementById('word');
 
-const correctletters = ['j','a']
+const correctletters = ['j','a'];
 const wrongletters = [];
 
 // function that gets random words for the game
@@ -19,7 +19,7 @@ function displayWord() {
     word_el.innerHTML = `
     ${selectedWord.split('').map(letter => `
         <div class="letter">
-            ${correctLetters.includes(letter) ? letter: ''}
+            ${correctletters.includes(letter) ? letter: ''}
         </div>
     
         `).join('')}
