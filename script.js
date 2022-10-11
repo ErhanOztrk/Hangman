@@ -3,15 +3,16 @@ const popup = document.getElementById('popup-container')
 const message_el = document.getElementById('succes-message')
 const wrongLetters_el = document.getElementById('wrong-letters')
 const items = document.querySelectorAll('.item')
-
+const message =  document.getElementById('message')
+const playAgainBtn = document.getElementById('play-again')
 
 const correctLetters = [];
 const wrongLetters = [];
-const selectedWord = getRandomWord();
+let selectedWord = getRandomWord();
 
 // function that gets random words for the game
 function getRandomWord () {
-    const words = ["javascript","java","phyton"];
+    const words = ["javascript","java","phyton","html","css"];
     return words[Math.floor(Math.random()*words.length)]
 
 }
@@ -19,7 +20,7 @@ function getRandomWord () {
 // console.log(getRandom())
 
 // function to show random word to player
-function displayWord() {
+const displayWord =()=> {
     word_el.innerHTML = `
     ${selectedWord.split('').map(letter => `
         <div class="letter">
@@ -38,7 +39,7 @@ function displayWord() {
    }
 }
 
-function updateWrongLetters() {
+const updateWrongLetters=()=> {
     wrongLetters_el.innerHTML = `
     ${wrongLetters.length > 0?'<h3>wrong letters</h3>':''}
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
@@ -61,6 +62,28 @@ items.forEach((item,index) => {
     }
 }
 
+const displayMessage = () => {
+    message.classList.add('show');
+
+    setTimeout(function() {
+        message.classList.remove('show')
+    },1000)
+}
+
+
+playAgainBtn.addEventListener('click',function() {
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = getRandomWord();
+    displayWord();
+    updateWrongLetters();
+
+    popup.style.display = 'none';
+
+})
+
+
 window.addEventListener('keydown', function(e){
     if(e.keyCode >= 65 && e.keyCode <= 90){
     const letter = e.key;
@@ -72,12 +95,17 @@ window.addEventListener('keydown', function(e){
             correctLetters.push(letter);
             displayWord();
         } else {
-            console.log('this letter already selected')
+            displayMessage()
+            message.classList.add('show')
+            // console.log('this letter already selected')
         }
      }else  {
         if(!wrongLetters.includes(letter)) {
         wrongLetters.push(letter);
          updateWrongLetters()
+     }
+     else {
+        displayMessage();
      }
      }
     }
