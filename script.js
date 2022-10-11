@@ -54,6 +54,11 @@ items.forEach((item,index) => {
         item.style.display = 'none';
     }
     })
+
+    if(wrongLetters.length ===items.length) {
+        popup.style.display = 'flex' ;
+        message_el.innerText = 'You Lose'
+    }
 }
 
 window.addEventListener('keydown', function(e){
