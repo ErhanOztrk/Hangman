@@ -10,16 +10,16 @@ const correctLetters = [];
 const wrongLetters = [];
 let selectedWord = getRandomWord();
 
-// function that gets random words for the game
-function getRandomWord () {
-    const words = ["javascript","java","phyton","html","css"];
+// function that set up the random words
+function getRandomWord() {
+    const words = ["javascript","java","html","css","react","spring"];
     return words[Math.floor(Math.random()*words.length)]
 
 }
 
 // console.log(getRandom())
 
-// function to show random word to player
+// function that adds a div element and display the correct letters.
 const displayWord =()=> {
     word_el.innerHTML = `
     ${selectedWord.split('').map(letter => `
@@ -31,21 +31,23 @@ const displayWord =()=> {
     
     `;
    
-   const w = word_el.innerText.replace(/\n/g,'')
-   if(w === selectedWord) {
-    popup.style.display = 'flex';
+    // popup congrulations message
+   const guessWord = word_el.innerText.replace(/\n/g,'')  // replace method :see the letters as a row
+   if(guessWord === selectedWord) {
+    popup.style.display = 'flex';  // make popup message visible
     message_el.innerText = 'Congrulations'
     //console.log('You Win!')
    }
 }
 
+//function to create h element and add the wrong letters to the list , display them to player
 const updateWrongLetters=()=> {
     wrongLetters_el.innerHTML = `
     ${wrongLetters.length > 0?'<h3>wrong letters</h3>':''}
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
     `;
 
-
+// with foreach method ; display the man's body parts if player selects the wrong letter
 items.forEach((item,index) => {
     const errorCount = wrongLetters.length;
 
@@ -62,12 +64,13 @@ items.forEach((item,index) => {
     }
 }
 
-const displayMessage = () => {
+//function to  add show class to display a message if player select the same letter more than once
+const displayMessage = () => {    
     message.classList.add('show');
 
     setTimeout(function() {
-        message.classList.remove('show')
-    },1000)
+        message.classList.remove('show');
+    }, 2000);
 }
 
 
@@ -96,8 +99,7 @@ window.addEventListener('keydown', function(e){
             displayWord();
         } else {
             displayMessage()
-            message.classList.add('show')
-            // console.log('this letter already selected')
+            // console.log('this letter has already selected')
         }
      }else  {
         if(!wrongLetters.includes(letter)) {

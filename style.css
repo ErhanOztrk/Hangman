@@ -85,7 +85,7 @@ body {
     padding: 10px 80px;
     position: absolute;
     bottom: -80px;
-    transition: transform 0.4 ease-in-out;
+    transition: transform 0.4s ease-in-out;
 }
 
 #message.show {
